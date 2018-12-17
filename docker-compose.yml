@@ -9,15 +9,29 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
 
-  wordpress:
-    image: wordpress:5.0
+  wp:
+    image: wordpress:5.0-php${PHP_VERSION:-7.2}
     restart: always
-    depends_on:
-      - mysql
     ports:
       - 6789:80
+    volumes:
+      - wp:/var/www/html:rw
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: root
       WORDPRESS_DB_PASSWORD: password
       WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - mysql
+
+  wp-cli:
+    image: wordpress:cli-php${PHP_VERSION:-7.2}
+    volumes:
+      - wp:/var/www/html:rw
+      - ./bin/wp-cli/install-wp.sh:/usr/local/bin/install-wp:ro
+    depends_on:
+      - mysql
+      - wp
+
+volumes:
+  wp: {}
