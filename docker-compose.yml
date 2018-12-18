@@ -9,13 +9,25 @@ services:
       MYSQL_ROOT_PASSWORD: password
       MYSQL_DATABASE: wordpress
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.8
+    restart: always
+    ports:
+      - 9876:80
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      - mysql
+
   wp:
-    image: wordpress:5.0-php${PHP_VERSION:-7.2}
+    image: wordpress:5.0-php7.2-apache
     restart: always
     ports:
       - 6789:80
     volumes:
       - wp:/var/www/html:rw
+      - ./src/theme:/var/www/html/wp-content/themes/my-theme:ro
+      - ./src/plugin:/var/www/html/wp-content/plugins/my-plugin:ro
     environment:
       WORDPRESS_DB_HOST: mysql
       WORDPRESS_DB_USER: root
@@ -25,9 +37,11 @@ services:
       - mysql
 
   wp-cli:
-    image: wordpress:cli-php${PHP_VERSION:-7.2}
+    image: wordpress:cli-php7.2
     volumes:
       - wp:/var/www/html:rw
+      - ./src/theme:/var/www/html/wp-content/themes/my-theme:ro
+      - ./src/plugin:/var/www/html/wp-content/plugins/my-plugin:ro
       - ./bin/wp-cli/install-wp.sh:/usr/local/bin/install-wp:ro
     depends_on:
       - mysql

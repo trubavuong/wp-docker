@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Install WordPress
 wp core install \
   --url="http://localhost:6789" \
   --title="WordPress" \
@@ -8,7 +9,15 @@ wp core install \
   --admin_email="admin@example.com" \
   --skip-email
 
+# Update permalink structure
 wp option update \
   permalink_structure "/%year%/%monthnum%/%day%/%postname%/" \
   --skip-themes \
-  --skip-plugins
+  --skip-plugins \
+  --skip-packages
+
+# Activate my theme
+wp theme activate my-theme
+
+# Activate my plugin
+wp plugin activate my-plugin
