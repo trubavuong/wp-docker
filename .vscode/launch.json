@@ -10,7 +10,7 @@
             "request": "launch",
 			"port": 9000,
 			"pathMappings": {
-				"/var/www/html/": "${workspaceRoot}/docker/volumes/html",
+				"/var/www/html/": "${workspaceRoot}/docker/volumes/html/<wordpress-variant>",
 				"/var/www/html/wp-content/themes/my-theme": "${workspaceRoot}/src/theme",
 				"/var/www/html/wp-content/plugins/my-plugin": "${workspaceRoot}/src/plugin"
 			}
