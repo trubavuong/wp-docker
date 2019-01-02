@@ -1,9 +1,11 @@
-1. Setup WordPress via Docker
-   $ cd docker/{wordpress-variant}
-   $ sudo docker-compose -f ../docker-compose.yml -p {project-name} up --build
+1. Start WordPress
+   $ cd docker
+   $ sudo bin/project-cli/services.sh start <wordpress-variant>
 
-2. Custom WP-CLI scripts
-   $ cd docker/{wordpress-variant}
+2. Stop WordPress
+   $ cd docker
+   $ sudo bin/project-cli/services.sh stop <wordpress-variant>
 
-   # Run WordPress installation process
-   $ sudo docker-compose -f ../docker-compose.yml -p {project-name} run --rm wp /usr/local/bin/wp-cli-custom/install-wp.sh
+3. Run WordPress installation process
+   $ cd docker
+   $ sudo bin/project-cli/services.sh install-wp <wordpress-variant>

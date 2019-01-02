@@ -6,7 +6,7 @@ wp \
 	--path="/var/www/html/" \
 	core install \
   --url="http://localhost:6789" \
-  --title="WordPress" \
+  --title="My Project" \
   --admin_user="root" \
   --admin_password="password" \
   --admin_email="admin@example.com" \
@@ -16,8 +16,7 @@ wp \
 wp \
 	--allow-root \
 	--path="/var/www/html/" \
-	option update \
-  permalink_structure "/%year%/%monthnum%/%day%/%postname%/" \
+	option update permalink_structure "/%year%/%monthnum%/%day%/%postname%/" \
   --skip-themes \
   --skip-plugins \
   --skip-packages
